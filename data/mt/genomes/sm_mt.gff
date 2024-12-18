@@ -1,0 +1,175 @@
+##gff-version 3
+##source-version geneious 2024.0.2
+##sequence-region	atp1	1	3435
+atp1	Geneious	gene	138	2698	.	+	.	ID=atp1.gene;Name=atp1
+atp1	Geneious	mRNA	138	2698	.	+	.	ID=atp1.mRNA;Name=atp1;Parent=atp1.gene
+atp1	Geneious	CDS	138	506	.	+	0	ID=atp1.CDS;Name=atp1;Parent=atp1.mRNA
+atp1	Geneious	CDS	1511	2698	.	+	0	ID=atp1.CDS;Name=atp1;Parent=atp1.mRNA
+##sequence-region	atp4	1	862
+atp4	Geneious	gene	155	721	.	+	.	ID=atp4.gene;Name=atp4
+atp4	Geneious	mRNA	155	721	.	+	.	ID=atp4.mRNA;Name=atp4;Parent=atp4.gene
+atp4	Geneious	CDS	155	721	.	+	0	ID=atp4.CDS;Name=atp4;Parent=atp4.mRNA
+##sequence-region	atp6	1	1492
+atp6	Geneious	gene	378	1130	.	+	.	ID=atp6.gene;Name=atp6
+atp6	Geneious	mRNA	378	1130	.	+	.	ID=atp6.mRNA;Name=atp6;Parent=atp6.gene
+atp6	Geneious	CDS	378	1130	.	+	0	ID=atp6.CDS;Name=atp6;Parent=atp6.mRNA
+##sequence-region	atp8	1	644
+atp8	Geneious	gene	73	585	.	+	.	ID=atp8.gene;Name=atp8
+atp8	Geneious	mRNA	73	585	.	+	.	ID=atp8.mRNA;Name=atp8;Parent=atp8.gene
+atp8	Geneious	CDS	73	585	.	+	0	ID=atp8.CDS;Name=atp8;Parent=atp8.mRNA
+##sequence-region	atp9	1	1237
+atp9	Geneious	gene	554	778	.	+	.	ID=atp9.gene;Name=atp9
+atp9	Geneious	mRNA	554	778	.	+	.	ID=atp9.mRNA;Name=atp9;Parent=atp9.gene
+atp9	Geneious	CDS	554	778	.	+	0	ID=atp9.CDS;Name=atp9;Parent=atp9.mRNA
+##sequence-region	cob	1	1424
+cob	Geneious	gene	98	1303	.	+	.	ID=cob.gene;Name=cob
+cob	Geneious	mRNA	98	1303	.	+	.	ID=cob.mRNA;Name=cob;Parent=cob.gene
+cob	Geneious	CDS	98	1303	.	+	0	ID=cob.CDS;Name=cob;Parent=cob.mRNA
+##sequence-region	cox1	1	4414
+cox1	Geneious	gene	1812	4339	.	+	.	ID=cox1.gene;Name=cox1
+cox1	Geneious	mRNA	1812	4339	.	+	.	ID=cox1.mRNA;Name=cox1;Parent=cox1.gene
+cox1	Geneious	CDS	1812	2116	.	+	0	ID=cox1.CDS;Name=cox1;Parent=cox1.mRNA
+cox1	Geneious	CDS	3160	4339	.	+	1	ID=cox1.CDS;Name=cox1;Parent=cox1.mRNA
+##sequence-region	cox2	1	1888
+cox2	Geneious	gene	80	1797	.	+	.	ID=cox2.gene;Name=cox2
+cox2	Geneious	mRNA	80	1797	.	+	.	ID=cox2.mRNA;Name=cox2;Parent=cox2.gene
+cox2	Geneious	CDS	80	485	.	+	0	ID=cox2.CDS;Name=cox2;Parent=cox2.mRNA
+cox2	Geneious	CDS	1421	1797	.	+	2	ID=cox2.CDS;Name=cox2;Parent=cox2.mRNA
+##sequence-region	cox3	1	1082
+cox3	Geneious	gene	197	895	.	+	.	ID=cox3.gene;Name=cox3
+cox3	Geneious	mRNA	197	895	.	+	.	ID=cox3.mRNA;Name=cox3;Parent=cox3.gene
+cox3	Geneious	CDS	197	895	.	+	0	ID=cox3.CDS;Name=cox3;Parent=cox3.mRNA
+##sequence-region	mttB	1	1251
+mttB	Geneious	gene	269	1003	.	+	.	ID=mttB.gene;Name=mttB
+mttB	Geneious	mRNA	269	1003	.	+	.	ID=mttB.mRNA;Name=mttB;Parent=mttB.gene
+mttB	Geneious	CDS	269	1003	.	+	0	ID=mttB.CDS;Name=mttB;Parent=mttB.mRNA
+##sequence-region	nad1	1	5723
+nad1	Geneious	gene	77	5648	.	+	.	ID=nad1.gene;Name=nad1
+nad1	Geneious	mRNA	77	5648	.	+	.	ID=nad1.mRNA;Name=nad1;Parent=nad1.gene
+nad1	Geneious	CDS	77	334	.	+	0	ID=nad1.CDS;Name=nad1;Parent=nad1.mRNA
+nad1	Geneious	CDS	1280	1415	.	+	0	ID=nad1.CDS;Name=nad1;Parent=nad1.mRNA
+nad1	Geneious	CDS	2861	3194	.	+	0	ID=nad1.CDS;Name=nad1;Parent=nad1.mRNA
+nad1	Geneious	CDS	5390	5648	.	+	1	ID=nad1.CDS;Name=nad1;Parent=nad1.mRNA
+##sequence-region	nad2	1	9471
+nad2	Geneious	gene	89	7593	.	+	.	ID=nad2.gene;Name=nad2
+nad2	Geneious	mRNA	89	7593	.	+	.	ID=nad2.mRNA;Name=nad2;Parent=nad2.gene
+nad2	Geneious	CDS	89	244	.	+	0	ID=nad2.CDS;Name=nad2;Parent=nad2.mRNA
+nad2	Geneious	CDS	1675	2060	.	+	0	ID=nad2.CDS;Name=nad2;Parent=nad2.mRNA
+nad2	Geneious	CDS	4154	4320	.	+	1	ID=nad2.CDS;Name=nad2;Parent=nad2.mRNA
+nad2	Geneious	CDS	5455	6027	.	+	2	ID=nad2.CDS;Name=nad2;Parent=nad2.mRNA
+nad2	Geneious	CDS	7406	7593	.	+	2	ID=nad2.CDS;Name=nad2;Parent=nad2.mRNA
+##sequence-region	nad3	1	508
+nad3	Geneious	gene	47	436	.	+	.	ID=nad3.gene;Name=nad3
+nad3	Geneious	mRNA	47	436	.	+	.	ID=nad3.mRNA;Name=nad3;Parent=nad3.gene
+nad3	Geneious	CDS	47	436	.	+	0	ID=nad3.CDS;Name=nad3;Parent=nad3.mRNA
+##sequence-region	nad4	1	7641
+nad4	Geneious	gene	41	6420	.	+	.	ID=nad4.gene;Name=nad4
+nad4	Geneious	mRNA	41	6420	.	+	.	ID=nad4.mRNA;Name=nad4;Parent=nad4.gene
+nad4	Geneious	CDS	41	1007	.	+	0	ID=nad4.CDS;Name=nad4;Parent=nad4.mRNA
+nad4	Geneious	CDS	3103	3525	.	+	2	ID=nad4.CDS;Name=nad4;Parent=nad4.mRNA
+nad4	Geneious	CDS	6332	6420	.	+	2	ID=nad4.CDS;Name=nad4;Parent=nad4.mRNA
+##sequence-region	nad4L	1	669
+nad4L	Geneious	gene	96	398	.	+	.	ID=nad4L.gene;Name=nad4L
+nad4L	Geneious	mRNA	96	398	.	+	.	ID=nad4L.mRNA;Name=nad4L;Parent=nad4L.gene
+nad4L	Geneious	CDS	96	398	.	+	0	ID=nad4L.CDS;Name=nad4L;Parent=nad4L.mRNA
+##sequence-region	nad5	1	6664
+nad5	Geneious	gene	168	6419	.	+	.	ID=nad5.gene;Name=nad5
+nad5	Geneious	mRNA	168	6419	.	+	.	ID=nad5.mRNA;Name=nad5;Parent=nad5.gene
+nad5	Geneious	CDS	168	397	.	+	0	ID=nad5.CDS;Name=nad5;Parent=nad5.mRNA
+nad5	Geneious	CDS	1411	2422	.	+	1	ID=nad5.CDS;Name=nad5;Parent=nad5.mRNA
+nad5	Geneious	CDS	3305	3517	.	+	1	ID=nad5.CDS;Name=nad5;Parent=nad5.mRNA
+nad5	Geneious	CDS	5332	5748	.	+	0	ID=nad5.CDS;Name=nad5;Parent=nad5.mRNA
+nad5	Geneious	CDS	6288	6419	.	+	0	ID=nad5.CDS;Name=nad5;Parent=nad5.mRNA
+##sequence-region	nad6	1	986
+nad6	Geneious	gene	198	812	.	+	.	ID=nad6.gene;Name=nad6
+nad6	Geneious	mRNA	198	812	.	+	.	ID=nad6.mRNA;Name=nad6;Parent=nad6.gene
+nad6	Geneious	CDS	198	812	.	+	0	ID=nad6.CDS;Name=nad6;Parent=nad6.mRNA
+##sequence-region	nad7	1	4358
+nad7	Geneious	gene	195	4238	.	+	.	ID=nad7.gene;Name=nad7
+nad7	Geneious	mRNA	195	4238	.	+	.	ID=nad7.mRNA;Name=nad7;Parent=nad7.gene
+nad7	Geneious	CDS	195	334	.	+	0	ID=nad7.CDS;Name=nad7;Parent=nad7.mRNA
+nad7	Geneious	CDS	1406	1474	.	+	1	ID=nad7.CDS;Name=nad7;Parent=nad7.mRNA
+nad7	Geneious	CDS	2213	2679	.	+	1	ID=nad7.CDS;Name=nad7;Parent=nad7.mRNA
+nad7	Geneious	CDS	3733	4238	.	+	0	ID=nad7.CDS;Name=nad7;Parent=nad7.mRNA
+##sequence-region	nad9	1	949
+nad9	Geneious	gene	172	912	.	+	.	ID=nad9.gene;Name=nad9
+nad9	Geneious	mRNA	172	912	.	+	.	ID=nad9.mRNA;Name=nad9;Parent=nad9.gene
+nad9	Geneious	CDS	172	912	.	+	0	ID=nad9.CDS;Name=nad9;Parent=nad9.mRNA
+##sequence-region	rpl2	1	5354
+rpl2	Geneious	gene	1060	2959	.	+	.	ID=rpl2.gene;Name=rpl2
+rpl2	Geneious	mRNA	1060	2959	.	+	.	ID=rpl2.mRNA;Name=rpl2;Parent=rpl2.gene
+rpl2	Geneious	CDS	1060	1521	.	+	0	ID=rpl2.CDS;Name=rpl2;Parent=rpl2.mRNA
+rpl2	Geneious	CDS	2309	2959	.	+	0	ID=rpl2.CDS;Name=rpl2;Parent=rpl2.mRNA
+##sequence-region	rpl5	1	919
+rpl5	Geneious	gene	158	730	.	+	.	ID=rpl5.gene;Name=rpl5
+rpl5	Geneious	mRNA	158	730	.	+	.	ID=rpl5.mRNA;Name=rpl5;Parent=rpl5.gene
+rpl5	Geneious	CDS	158	730	.	+	0	ID=rpl5.CDS;Name=rpl5;Parent=rpl5.mRNA
+##sequence-region	rpl6	1	448
+rpl6	Geneious	gene	72	371	.	+	.	ID=rpl6.gene;Name=rpl6
+rpl6	Geneious	mRNA	72	371	.	+	.	ID=rpl6.mRNA;Name=rpl6;Parent=rpl6.gene
+rpl6	Geneious	CDS	72	371	.	+	0	ID=rpl6.CDS;Name=rpl6;Parent=rpl6.mRNA
+##sequence-region	rpl16	1	651
+rpl16	Geneious	gene	121	528	.	+	.	ID=rpl16.gene;Name=rpl16
+rpl16	Geneious	mRNA	121	528	.	+	.	ID=rpl16.mRNA;Name=rpl16;Parent=rpl16.gene
+rpl16	Geneious	CDS	121	528	.	+	0	ID=rpl16.CDS;Name=rpl16;Parent=rpl16.mRNA
+##sequence-region	rps1	1	1466
+rps1	Geneious	gene	723	1316	.	+	.	ID=rps1.gene;Name=rps1
+rps1	Geneious	mRNA	723	1316	.	+	.	ID=rps1.mRNA;Name=rps1;Parent=rps1.gene
+rps1	Geneious	CDS	723	1316	.	+	0	ID=rps1.CDS;Name=rps1;Parent=rps1.mRNA
+##sequence-region	rps2	1	2332
+rps2	Geneious	gene	95	925	.	+	.	ID=rps2.gene;Name=rps2
+rps2	Geneious	mRNA	95	925	.	+	.	ID=rps2.mRNA;Name=rps2;Parent=rps2.gene
+rps2	Geneious	CDS	95	925	.	+	0	ID=rps2.CDS;Name=rps2;Parent=rps2.mRNA
+##sequence-region	rps3	1	4236
+rps3	Geneious	gene	490	3929	.	+	.	ID=rps3.gene;Name=rps3
+rps3	Geneious	mRNA	490	3929	.	+	.	ID=rps3.mRNA;Name=rps3;Parent=rps3.gene
+rps3	Geneious	CDS	490	563	.	+	0	ID=rps3.CDS;Name=rps3;Parent=rps3.mRNA
+rps3	Geneious	CDS	1756	2050	.	+	1	ID=rps3.CDS;Name=rps3;Parent=rps3.mRNA
+rps3	Geneious	CDS	2934	3929	.	+	0	ID=rps3.CDS;Name=rps3;Parent=rps3.mRNA
+##sequence-region	rps4	1	1436
+rps4	Geneious	gene	277	1140	.	+	.	ID=rps4.gene;Name=rps4
+rps4	Geneious	mRNA	277	1140	.	+	.	ID=rps4.mRNA;Name=rps4;Parent=rps4.gene
+rps4	Geneious	CDS	277	1140	.	+	0	ID=rps4.CDS;Name=rps4;Parent=rps4.mRNA
+##sequence-region	rps7	1	543
+rps7	Geneious	gene	75	476	.	+	.	ID=rps7.gene;Name=rps7
+rps7	Geneious	mRNA	75	476	.	+	.	ID=rps7.mRNA;Name=rps7;Parent=rps7.gene
+rps7	Geneious	CDS	75	476	.	+	0	ID=rps7.CDS;Name=rps7;Parent=rps7.mRNA
+##sequence-region	rps10	1	436
+rps10	Geneious	gene	74	382	.	+	.	ID=rps10.gene;Name=rps10
+rps10	Geneious	mRNA	74	382	.	+	.	ID=rps10.mRNA;Name=rps10;Parent=rps10.gene
+rps10	Geneious	CDS	74	382	.	+	0	ID=rps10.CDS;Name=rps10;Parent=rps10.mRNA
+##sequence-region	rps11	1	811
+rps11	Geneious	gene	252	683	.	+	.	ID=rps11.gene;Name=rps11
+rps11	Geneious	mRNA	252	683	.	+	.	ID=rps11.mRNA;Name=rps11;Parent=rps11.gene
+rps11	Geneious	CDS	252	683	.	+	0	ID=rps11.CDS;Name=rps11;Parent=rps11.mRNA
+##sequence-region	rps12	1	659
+rps12	Geneious	gene	141	521	.	+	.	ID=rps12.gene;Name=rps12
+rps12	Geneious	mRNA	141	521	.	+	.	ID=rps12.mRNA;Name=rps12;Parent=rps12.gene
+rps12	Geneious	CDS	141	521	.	+	0	ID=rps12.CDS;Name=rps12;Parent=rps12.mRNA
+##sequence-region	rps13	1	573
+rps13	Geneious	gene	69	512	.	+	.	ID=rps13.gene;Name=rps13
+rps13	Geneious	mRNA	69	512	.	+	.	ID=rps13.mRNA;Name=rps13;Parent=rps13.gene
+rps13	Geneious	CDS	69	512	.	+	0	ID=rps13.CDS;Name=rps13;Parent=rps13.mRNA
+##sequence-region	rps14	1	2678
+rps14	Geneious	gene	261	2434	.	+	.	ID=rps14.gene;Name=rps14
+rps14	Geneious	mRNA	261	2434	.	+	.	ID=rps14.mRNA;Name=rps14;Parent=rps14.gene
+rps14	Geneious	CDS	261	494	.	+	0	ID=rps14.CDS;Name=rps14;Parent=rps14.mRNA
+rps14	Geneious	CDS	2249	2434	.	+	0	ID=rps14.CDS;Name=rps14;Parent=rps14.mRNA
+##sequence-region	rps19	1	3653
+rps19	Geneious	gene	1262	1510	.	+	.	ID=rps19.gene;Name=rps19
+rps19	Geneious	mRNA	1262	1510	.	+	.	ID=rps19.mRNA;Name=rps19;Parent=rps19.gene
+rps19	Geneious	CDS	1262	1510	.	+	0	ID=rps19.CDS;Name=rps19;Parent=rps19.mRNA
+##sequence-region	sdh3	1	999
+sdh3	Geneious	gene	254	649	.	+	.	ID=sdh3.gene;Name=sdh3
+sdh3	Geneious	mRNA	254	649	.	+	.	ID=sdh3.mRNA;Name=sdh3;Parent=sdh3.gene
+sdh3	Geneious	CDS	254	649	.	+	0	ID=sdh3.CDS;Name=sdh3;Parent=sdh3.mRNA
+##sequence-region	sdh4	1	440
+sdh4	Geneious	gene	88	351	.	+	.	ID=sdh4.gene;Name=sdh4
+sdh4	Geneious	mRNA	88	351	.	+	.	ID=sdh4.mRNA;Name=sdh4;Parent=sdh4.gene
+sdh4	Geneious	CDS	88	351	.	+	0	ID=sdh4.CDS;Name=sdh4;Parent=sdh4.mRNA
+##sequence-region	mat-Lepto	1	6567
+mat-Lepto	Geneious	gene	917	5959	.	+	.	ID=mat-Lepto.gene;Name=mat-Lepto
+mat-Lepto	Geneious	mRNA	917	5959	.	+	.	ID=mat-Lepto.mRNA;Name=mat-Lepto;Parent=mat-Lepto.gene
+mat-Lepto	Geneious	CDS	917	1005	.	+	0	ID=mat-Lepto.CDS;Name=mat-Lepto;Parent=mat-Lepto.mRNA
+mat-Lepto	Geneious	CDS	3682	5959	.	+	1	ID=mat-Lepto.CDS;Name=mat-Lepto;Parent=mat-Lepto.mRNA
+mat-Lepto	Geneious	CDS	917	2731	.	+	0	ID=mat-Leptoi95g2c.CDS.1;Name=mat-Leptoi95g2c;Parent=mat-Lepto.mRNA
