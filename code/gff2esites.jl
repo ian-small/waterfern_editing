@@ -97,14 +97,26 @@ function prepact_name(position, cds_name, base, cds_position, aa, edited_aa)
     end
 end
 
-function prepact_ref_name(alignments, position, cds_name, base, cds_position, aa, edited_aa)
-    if ismissing(cds_name)
-        return ""
+function prepact_ref_name(species, alignments, position, cds_name, base, cds_position, aa, edited_aa)
+    species_name = Dict("af" => "Af", "ar" => "Ar", "ap" => "Ap", "sm" => "Sm", "mm" => "Mm")
+    if haskey(alignments,cds_name)
+        ref = alignments[cds_name]["Af"]
+        cds = alignments[cds_name][species_name[species]]
+        aln_pos = 0
+        target_pos = 0
+        ref_pos = 0
+        while target_pos <= cds_position
+            if cds[aln_pos + 1] ≠ DNA_Gap
+                target_pos += 1
+            end
+            aln_pos += 1
+            if ref[aln_pos] ≠ DNA_Gap
+                ref_pos += 1
+            end
+        end
+        return cds_name * "e" * string(base) * string(ref_pos-1) * string(aa) * string(edited_aa) * "rAfi"
     else
-        codon = ceil(Int, cds_position / 3)
-        ref_codon = first(seq2ref(alignments[cds_name], codon))
-        ref_cds_position = 3 * (ref_codon - 1) + mod1(cds_position, 3)
-        return cds_name * "e" * string(base) * string(ref_cds_position) * string(aa) * string(edited_aa) * "rAfi"
+        return ""
     end
 end
 
@@ -136,31 +148,6 @@ function splice!(orfs, orf_idxs, editedseqs, gene::Gene)
         end
     end
 end
-
-#= function getCDS(gene::Gene)
-    refseq = refseqs[gene.gene.contig]
-    orfnames = unique(get.(getproperty.(gene.CDSs, :attributes), "Name", nothing))
-    if gene.gene.strand == '+'
-        for orfname in orfnames
-            orf = LongDNA{4}()
-            exons = sort(gene.CDSs[findall(x->x.attributes["Name"] == orfname, gene.CDSs)]; by = x->x.start)
-            for exon in exons
-                append!(orf, first(refseq)[exon.start:exon.stop])
-            end
-            cdss[orfname] = orf
-        end
-    else
-        for orfname in orfnames
-            orf = LongDNA{4}()
-            exons = sort(gene.CDSs[findall(x->x.attributes["Name"] == orfname, gene.CDSs)]; by = x->x.start, rev = true)
-            l = length(last(refseq))
-            for exon in exons
-                append!(orf, last(refseq)[l-exon.stop+1:l-exon.start+1])
-            end
-            cdss[orfname] = orf
-        end
-    end
-end =#
 
 function rc(x,l)
     l-x+1
@@ -235,7 +222,7 @@ function main(ARGS)
     println(target)
 
     refseqs = organelle == "cp" ? Dict{String, Tuple{CircularSequence, CircularSequence}}() : Dict{String, Tuple{LongDNA{4}, LongDNA{4}}}()
-    FASTA.Reader(open("data/$organelle/genomes/$target.fasta")) do infile
+    FASTA.Reader(open("../data/$organelle/genomes/$target.fasta")) do infile
         refs = FASTA.Record[]
         for record in infile
             seq = FASTA.sequence(LongDNA{4}, record)
@@ -244,7 +231,7 @@ function main(ARGS)
         end
     end
 
-    gff = CSV.File("data/$organelle/genomes/$target.gff", comment = "#", header = ["sequence", "software", "feature", "start", "stop", "score", "strand", "phase", "attributes"]) |> DataFrame
+    gff = CSV.File("../data/$organelle/genomes/$target.gff", comment = "#", header = ["sequence", "software", "feature", "start", "stop", "score", "strand", "phase", "attributes"]) |> DataFrame
     filter!(x -> x.feature ≠ "misc_feature", gff)
 
     gffgenes = filter(x->x.feature == "gene", gff)
@@ -260,13 +247,6 @@ function main(ARGS)
         end
     end
 
-#=     #check for duplicate genes
-    geneids = [x.id for x in genes]
-    if length(geneids) ≠ length(unique(geneids))
-        println("gene IDs contain duplicates")
-        println(filter(x -> last(x) > 1, countmap(geneids)))
-    end
- =#
     add_features!(genes, gff, "tRNA")
     add_features!(genes, gff, "rRNA")
     add_features!(genes, gff, "ncRNA")
@@ -277,19 +257,7 @@ function main(ARGS)
         end
     end
 
-#=     cdss = Dict{String, LongDNA{4}}()
-    for g in genes
-        getCDS!(cdss, g)
-    end
-
-    open(target*"_CDS.fasta", "w") do outfile
-        for (name, orf) in cdss
-            println(outfile, ">"*name)
-            println(outfile, orf)
-        end
-    end =#
-
-    insites =  CSV.File("data/$organelle/edit_sites/$target" * "_edits.tsv", comment="#") |> DataFrame
+    insites =  CSV.File("../data/$organelle/edit_sites/$target" * "_edits.tsv", comment="#") |> DataFrame
 
     if organelle == "cp"
         insites.refID = replace.(insites.refID, "_1kb"=>"")
@@ -332,26 +300,17 @@ function main(ARGS)
         splice!(orfs, orf_idxs, editedseqs, g)
     end
 
-
-    proteins = Dict{String, LongAA}()
-    for (name, orf) in orfs
-        pep = translate(orf)
-        proteins[name] = pep
-    end
-
-    ref_proteins = Dict{String, LongAA}()
-    FASTA.Reader(open("data/$organelle/genomes/af_$organelle" * "_" * "proteins.fasta")) do infile
-        for record in infile
-            ref_proteins[identifier(record)] = FASTA.sequence(LongAA, record)
+    alignments = Dict{String,Dict{String, LongDNA{4}}}()
+    aln_files = filter(x -> endswith(x, ".aln"), readdir("../data/$organelle/alignments"; join = true))
+    for f in aln_files
+        seqs = Dict{String, LongDNA{4}}()
+        FASTA.Reader(open(f)) do infile
+            for r in infile
+                seqs[identifier(r)] = FASTA.sequence(LongDNA{4}, r)
+            end
         end
-    end
-
-    scoremodel = AffineGapScoreModel(PAM70, gap_open=-5, gap_extend=-1)
-
-    alignments = Dict{String, Alignment}()
-
-    for (name, pep) in proteins
-        alignments[name] = alignment(alignment(pairalign(GlobalAlignment(), proteins[name], ref_proteins[name], scoremodel)))
+        gene = first(split(basename(f), "."))
+        alignments[gene] = seqs
     end
 
     editing = Dict(DNA_A => RNA_G, DNA_C => RNA_U, DNA_G => RNA_A, DNA_T => RNA_C)
@@ -416,7 +375,7 @@ function main(ARGS)
             subsequent_base = orfs[cds_name][cds_position + 1]
             id = prepact_name(position, cds_name, edited_base, cds_position, aa, edited_aa)
             #print(id)
-            ref_id = prepact_ref_name(alignments, position, cds_name, edited_base, cds_position, aa, edited_aa)
+            ref_id = prepact_ref_name(species, alignments, position, cds_name, edited_base, cds_position, aa, edited_aa)
             #print("\t", ref_id, "\n")
         else
             preceding_base = strand == '+' ? first(refseqs[contig])[position - 1] : last(refseqs[contig])[position + 1]
@@ -429,7 +388,7 @@ function main(ARGS)
         push!(esites, (contig, strand, position, id, ref_id, reference_base, edited_base, proportion_edited, cds_name, cds_position, codon_position, codon, edited_codon, aa, edited_aa,
         synonymous, creates_start, creates_stop, removes_stop, preceding_base, subsequent_base))
     end
-    CSV.write(target * "_" * "editing_events.tsv", esites; delim='\t')
+    CSV.write("../data/$organelle/edit_sites/" * target * "_" * "editing_events.tsv", esites; delim='\t')
     nothing
 end
 @main

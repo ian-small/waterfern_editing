@@ -385,9 +385,9 @@ ar_chloroplast	-	78531	rpl16eU317SL	rpl16eU317SLrAfi	C	U	0.8970129656983423	rpl1
 ar_chloroplast	-	78844	rpl16eU823		C	U	0.30932999373825926		823	0	---	---	-	-		false	false	false	A	G
 ar_chloroplast	-	80004	rps3eU452SL	rps3eU452SLrAfi	C	U	0.9858717151737779	rps3	452	2	UCG	UUG	S	L	false	false	false	false	U	G
 ar_chloroplast	-	80454	rps3eU2TM	rps3eU2TMrAfi	C	U	0.8742311770943796	rps3	2	2	ACG	AUG	T	M	false	true	false	false	A	G
-ar_chloroplast	-	80608	rpl22eU344SL	rpl22eU344SLrAfi	C	U	0.9708926261319534	rpl22	344	2	UCG	UUG	S	L	false	false	false	false	U	G
-ar_chloroplast	-	80821	rpl22eU131PL	rpl22eU131PLrAfi	C	U	0.9358891054797488	rpl22	131	2	CCU	CUU	P	L	false	false	false	false	C	U
-ar_chloroplast	-	80824	rpl22eU128SL	rpl22eU128SLrAfi	C	U	0.9217486338797815	rpl22	128	2	UCA	UUA	S	L	false	false	false	false	U	A
+ar_chloroplast	-	80608	rpl22eU344SL		C	U	0.9708926261319534	rpl22	344	2	UCG	UUG	S	L	false	false	false	false	U	G
+ar_chloroplast	-	80821	rpl22eU131PL		C	U	0.9358891054797488	rpl22	131	2	CCU	CUU	P	L	false	false	false	false	C	U
+ar_chloroplast	-	80824	rpl22eU128SL		C	U	0.9217486338797815	rpl22	128	2	UCA	UUA	S	L	false	false	false	false	U	A
 ar_chloroplast	-	81246	rps19eU2TM	rps19eU2TMrAfi	C	U	0.9413674173260296	rps19	2	2	ACG	AUG	T	M	false	true	false	false	A	G
 ar_chloroplast	-	81554	rpl2eU562RC	rpl2eU562RCrAfi	C	U	0.9200952057123427	rpl2	562	1	CGU	UGU	R	C	false	false	false	false	U	G
 ar_chloroplast	-	82810	rpl2eC10*R	rpl2eC10*RrAfi	T	C	0.8580152671755725	rpl2	10	1	UGA	CGA	*	R	false	false	false	true	A	G

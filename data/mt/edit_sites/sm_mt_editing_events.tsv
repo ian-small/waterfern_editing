@@ -173,7 +173,7 @@ atp4	+	600	atp4eU446SF	atp4eU446SFrAfi	C	U	0.9353412423937312	atp4	446	2	UCC	UUU
 atp4	+	601	atp4eU447SF	atp4eU447SFrAfi	C	U	0.13212311174959732	atp4	447	3	UCC	UUU	S	F	false	false	false	false	U	C
 atp4	+	608	atp4eU454PS	atp4eU454PSrAfi	C	U	0.9333098405426835	atp4	454	1	CCA	UCA	P	S	false	false	false	false	U	C
 atp4	+	619	atp4eU465DD	atp4eU465DDrAfi	C	U	0.07345318701844501	atp4	465	3	GAC	GAU	D	D	true	false	false	false	A	G
-atp4	+	637	atp4eU483SS	atp4eU483SSrAfi	C	U	0.13286498128301114	atp4	483	3	UCC	UCU	S	S	true	false	false	false	C	A
+atp4	+	637	atp4eU483SS	atp4eU481SSrAfi	C	U	0.13286498128301114	atp4	483	3	UCC	UCU	S	S	true	false	false	false	C	A
 atp4	+	677	atp4eC523*Q	atp4eC520*QrAfi	T	C	0.8460384153661464	atp4	523	1	UAA	CAA	*	Q	false	false	false	true	C	A
 atp4	+	680	atp4eU526PS	atp4eU523PSrAfi	C	U	0.906179204749629	atp4	526	1	CCG	UCG	P	S	false	false	false	false	A	C
 atp4	+	719	atp4eU565Q*	atp4eU562Q*rAfi	C	U	0.8176529255319149	atp4	565	1	CAG	UAG	Q	*	false	false	true	false	C	A
@@ -2076,7 +2076,7 @@ mat-Lepto	+	2235	mat-Leptoi95g2ceU1319PL	mat-Leptoi95g2ceU1328PLrAfi	C	U	0.55471
 mat-Lepto	+	2249	mat-Leptoi95g2ceC1333YH	mat-Leptoi95g2ceC1342YHrAfi	T	C	0.5980707395498392	mat-Leptoi95g2c	1333	1	UAC	CAC	Y	H	false	false	false	false	U	A
 mat-Lepto	+	2273	mat-Leptoi95g2ceC1357WR	mat-Leptoi95g2ceC1366WRrAfi	T	C	0.1419753086419753	mat-Leptoi95g2c	1357	1	UGG	CGG	W	R	false	false	false	false	U	G
 mat-Lepto	+	2426	mat-Leptoi95g2ceC1510*Q	mat-Leptoi95g2ceC1519*QrAfi	T	C	0.6277533039647577	mat-Leptoi95g2c	1510	1	UAA	CAA	*	Q	false	false	false	true	A	A
-mat-Lepto	+	2611	mat-Leptoi95g2ceU1695TT	mat-Leptoi95g2ceU1701TTrAfi	C	U	0.1391304347826087	mat-Leptoi95g2c	1695	3	ACC	ACU	T	T	true	false	false	false	C	U
+mat-Lepto	+	2611	mat-Leptoi95g2ceU1695TT	mat-Leptoi95g2ceU1705TTrAfi	C	U	0.1391304347826087	mat-Leptoi95g2c	1695	3	ACC	ACU	T	T	true	false	false	false	C	U
 mat-Lepto	+	3714	mat-LeptoeU122SF	mat-LeptoeU128SFrAfi	C	U	0.8173913043478261	mat-Lepto	122	2	UCU	UUU	S	F	false	false	false	false	U	U
 mat-Lepto	+	3721	mat-LeptoeU129FF	mat-LeptoeU135FFrAfi	C	U	0.4880546075085324	mat-Lepto	129	3	UUC	UUU	F	F	true	false	false	false	U	A
 mat-Lepto	+	3767	mat-LeptoeC175*R	mat-LeptoeC181*RrAfi	T	C	0.640194489465154	mat-Lepto	175	1	UGA	CGA	*	R	false	false	false	true	A	G
@@ -2153,4 +2153,4 @@ mat-Lepto	+	5918	mat-LeptoeU2326PL	mat-LeptoeU2326PLrAfi	C	U	0.08094262295081968
 mat-Lepto	+	5919	mat-LeptoeU2327PL	mat-LeptoeU2327PLrAfi	C	U	0.9472595656670114	mat-Lepto	2327	2	CCG	UUG	P	L	false	false	false	false	U	G
 mat-Lepto	+	5922	mat-LeptoeU2330PL	mat-LeptoeU2330PLrAfi	C	U	0.7645854657113613	mat-Lepto	2330	2	CCA	CUA	P	L	false	false	false	false	C	A
 mat-Lepto	+	5930	mat-LeptoeC2338*R	mat-LeptoeC2338*RrAfi	T	C	0.7910602910602911	mat-Lepto	2338	1	UGA	CGA	*	R	false	false	false	true	C	G
-mat-Lepto	+	5957	mat-LeptoeU2365Q*	mat-LeptoeU2419Q*rAfi	C	U	0.8548728813559322	mat-Lepto	2365	1	CAA	UAA	Q	*	false	false	true	false	C	A
+mat-Lepto	+	5957	mat-LeptoeU2365Q*	mat-LeptoeU2365Q*rAfi	C	U	0.8548728813559322	mat-Lepto	2365	1	CAA	UAA	Q	*	false	false	true	false	C	A

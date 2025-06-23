@@ -382,4 +382,4 @@ ap_chloroplast	+	124604	ndhFeU1079PL	ndhFeU1079PLrAfi	C	U	0.9574295560510845	ndh
 ap_chloroplast	+	124656	ndhFeU1131PP	ndhFeU1131PPrAfi	C	U	0.08142246404974737	ndhF	1131	3	CCC	CCU	P	P	true	false	false	false	C	G
 ap_chloroplast	+	124666	ndhFeC1141*Q	ndhFeC1141*QrAfi	T	C	0.9215094339622641	ndhF	1141	1	UAG	CAG	*	Q	false	false	false	true	U	A
 ap_chloroplast	+	124862	ndhFeU1337SF	ndhFeU1337SFrAfi	C	U	0.9632627646326276	ndhF	1337	2	UCU	UUU	S	F	false	false	false	false	U	U
-ap_chloroplast	+	125450	ndhFeU1925SF	ndhFeU1904SFrAfi	C	U	0.1410958904109589	ndhF	1925	2	UCU	UUU	S	F	false	false	false	false	U	U
+ap_chloroplast	+	125450	ndhFeU1925SF	ndhFeU1922SFrAfi	C	U	0.1410958904109589	ndhF	1925	2	UCU	UUU	S	F	false	false	false	false	U	U

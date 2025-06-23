@@ -1653,7 +1653,7 @@ rps1	+	598	rps1eU504SF	rps1eU504SFrAfi	C	U	0.46235842771485675	rps1	504	3	UCC	UU
 rps1	+	605	rps1eU511LL	rps1eU511LLrAfi	C	U	0.8757396449704142	rps1	511	1	CUG	UUG	L	L	true	false	false	false	U	U
 rps1	+	612	rps1eU518TM	rps1eU518TMrAfi	C	U	0.9556313993174061	rps1	518	2	ACG	AUG	T	M	false	false	false	false	A	G
 rps1	+	636	rps1eU542AV	rps1eU542AVrAfi	C	U	0.9487375669472073	rps1	542	2	GCG	GUG	A	V	false	false	false	false	G	G
-rps1	+	698	rps1eU604R*	rps1eU595R*rAfi	C	U	0.9572072072072072	rps1	604	1	CGA	UGA	R	*	false	false	true	false	U	G
+rps1	+	698	rps1eU604R*	rps1eU596R*rAfi	C	U	0.9572072072072072	rps1	604	1	CGA	UGA	R	*	false	false	true	false	U	G
 rps2	+	60	rps2eC22*Q	rps2eC22*QrAfi	T	C	0.966321243523316	rps2	22	1	UAA	CAA	*	Q	false	false	false	true	A	A
 rps2	+	70	rps2eU32TI	rps2eU32TIrAfi	C	U	0.2535211267605634	rps2	32	2	ACU	AUU	T	I	false	false	false	false	A	U
 rps2	+	76	rps2eC38LP	rps2eC38LPrAfi	T	C	0.9863013698630136	rps2	38	2	CUA	CCA	L	P	false	false	false	false	C	A

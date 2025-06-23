@@ -177,7 +177,7 @@ function loglikelihood_f!(rates::Vector{Float64}, data::PartitionData, ancestral
         TtoC = rates[1]
         CtoT = rates[2]
         if p > 1
-            if data.partition_directions[p-1]
+            if data.partition_directions[p]
                 TtoC = rates[p+1]
             else
                 CtoT = rates[p+1]
@@ -230,14 +230,14 @@ end
 function main(ARGS)
     genes = AbstractString[]
     species = ["Af", "Ap", "Ar", "Sm", "Mm"]
-    organelle = "cp" # change to "mt" for mitochondrial profiles
+    organelle = ARGS[1] # mt or cp
     sequences = Dict{String, LongDNA{4}}()
     for s in species
         sequences[s] = LongDNA{4}()
     end
     geneoffsets = [0]
 
-    for filename in sort(filter(x->endswith(x, ".aln"), readdir("data/$organelle/alignments"; join = true)))
+    for filename in sort(filter(x->endswith(x, ".aln"), readdir("../data/$organelle/alignments"; join = true)))
         gene = first(split(basename(filename), "."))
         FASTA.Reader(open(filename)) do alnfile
             for (n, record) in enumerate(alnfile)
@@ -253,9 +253,20 @@ function main(ARGS)
 
     df = DataFrame(pos=collect(1:length(genes)),gene=genes,Af=collect(sequences["Af"]),Ap=collect(sequences["Ap"]),Ar=collect(sequences["Ar"]),Sm=collect(sequences["Sm"]),Mm=collect(sequences["Mm"]))
     df.refpos = map2ref(df.Af, genes)
-    df.onlyY = onlyY.(eachrow(df[:,3:7]))
-    filter!(x->x.onlyY, df)
-    println("$(nrow(df)) DNA sites considered")
+
+    df.is_start_triplet = falses(nrow(df))
+    for sp in species, pos in 2:nrow(df)-1
+        if length(unique(df[pos-1:pos+1, :gene])) == 1 && df[pos-1:pos+1, Symbol(sp)] == [DNA_A, DNA_C, DNA_G]
+            df[pos, :is_start_triplet] = true
+        end
+    end
+
+    df.is_stop_triplet = falses(nrow(df))
+    for sp in species, pos in 1:nrow(df)-2
+        if length(unique(df[pos:pos+2, :gene])) == 1 && df[pos:pos+2, Symbol(sp)] ∈ [[DNA_T, DNA_A, DNA_A], [DNA_T, DNA_G, DNA_A], [DNA_T, DNA_A, DNA_G]]
+            df[pos, :is_stop_triplet] = true
+        end
+    end
 
     synAf = Yissynonymous(df.gene, df.Af)
     synAp = Yissynonymous(df.gene, df.Ap)
@@ -265,6 +276,10 @@ function main(ARGS)
 
     df.Yissynonymous = synAf .& synAp .& synAr .& synSm .& synMm
 
+    df.onlyY = onlyY.(eachrow(df[:,3:7]))
+    filter!(x->x.onlyY, df)
+    println("$(nrow(df)) DNA sites considered")
+
     #add editing sites
     df.editsite = falses(nrow(df))
     df.edittype = fill('.', nrow(df))
@@ -272,7 +287,7 @@ function main(ARGS)
     df.creates_stop = falses(nrow(df))
     df.removes_stop = falses(nrow(df))
     df.editing_differs_by_mutation = trues(nrow(df))
-    editing_sites = CSV.File("data/$organelle/edit_sites/all_$organelle" * "_sites.tsv") |> DataFrame
+    editing_sites = CSV.File("../data/$organelle/edit_sites/all_$organelle" * "_sites.tsv") |> DataFrame
     for site in eachrow(editing_sites)
         gene, type, refpos = parse_uid(site.uid)
         if nrow(df[(df.gene .== gene) .& (df.refpos .== refpos), :]) == 0
@@ -290,6 +305,32 @@ function main(ARGS)
     filter!(x->x.editing_differs_by_mutation, df)
 
     println("$(nrow(df)) sites retained, of which $(sum(df.editsite)) sites are edited")
+
+    # partitions
+    unedited_partition = df.edittype .== '.'
+    println("unedited_partition: $(sum(unedited_partition)) sites")
+
+    C2U_partition = df.edittype .== 'U'
+    println("C2U_partition: $(sum(C2U_partition)) sites")
+    synC2U_partition = (df.edittype .== 'U') .& df.Yissynonymous
+    println("synC2U_partition: $(sum(synC2U_partition)) sites")
+    nonsynC2U_partition = (df.edittype .== 'U') .& (.~df.Yissynonymous)
+    println("nonsynC2U_partition: $(sum(nonsynC2U_partition)) sites")
+    senseC2U_partition = nonsynC2U_partition .& (.~df.creates_start)
+    println("senseC2U_partition: $(sum(senseC2U_partition)) sites")
+    creates_start_partition = df.creates_start
+    println("creates_start_partition: $(sum(creates_start_partition)) sites")
+
+    U2C_partition = df.edittype .== 'C'
+    println("U2C_partition: $(sum(U2C_partition)) sites")
+    synU2C_partition = (df.edittype .== 'C') .& df.Yissynonymous
+    println("synU2C_partition: $(sum(synU2C_partition)) sites")
+    nonsynU2C_partition = (df.edittype .== 'C') .& (.~df.Yissynonymous)
+    println("nonsynU2C_partition: $(sum(nonsynU2C_partition)) sites")
+    senseU2C_partition = nonsynU2C_partition .& (.~df.removes_stop)
+    println("senseU2C_partition: $(sum(senseU2C_partition)) sites")
+    removes_stop_partition = df.removes_stop
+    println("removes_stop_partition: $(sum(removes_stop_partition)) sites")
 
     println("constructing evolutionary trajectories...")
     trajectories = bitperm(9)
@@ -309,63 +350,169 @@ function main(ARGS)
     end
     df.epattern = epatterns
 
-    #unpartitioned
-#=  pdata=PartitionData([df.epattern],BitVector[])
-    resolution = 100
-    searchspace = logrange(1e-4, 1e-2, resolution)
-    searchspaces = fill(searchspace, length(pdata.partitions) + 1)
-    profiles = profile_likelihoods(pdata, searchspaces, resolution,
-        ancestral, trajectories, trajectoriesbypattern)
-    serialize("unpartitioned.bin", profiles)
+    partioning_scheme = ""
+    #partioning_scheme = "unedited"
+    if partioning_scheme == "unedited"
+        pdata = PartitionData([df[unedited_partition, :epattern]],BitVector([]))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = organelle == "cp" ? logrange(1e-4, 1e-2, resolution) : logrange(1e-5, 1e-3, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("unedited_$organelle.bin", profiles)
+    end
 
-    #partitioned
-    pdata = PartitionData([df[df.edittype .== '.', :epattern], df[df.edittype .== 'U', :epattern], df[df.edittype .== 'C', :epattern]],BitVector([0,1]))
-    @assert sum(length.(pdata.partitions)) == nrow(df)
-    resolution = 10
-    searchspace = logrange(1e-4, 1e-2, resolution)
-    searchspaces = fill(searchspace, length(pdata.partitions) + 1)
-    profiles = profile_likelihoods(pdata, searchspaces, resolution,
-        ancestral, trajectories, trajectoriesbypattern)
-    serialize("partitioned.bin", profiles) =#
+    #partioning_scheme = "unpartitioned_nonsynC2U"
+    #unpartitioned nonsynC2U
+    if partioning_scheme == "unpartitioned_nonsynC2U"
+        pdata = PartitionData([df[nonsynC2U_partition, :epattern]],BitVector([]))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = organelle == "cp" ? logrange(1e-4, 1e-2, resolution) : logrange(1e-5, 1e-3, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("unpartitioned_nonsynC2U_$organelle.bin", profiles)
+    end
+
+    #partioning_scheme = "partitioned_by_creates_start"
+    #partitioned by creates_start
+    if partioning_scheme == "partitioned_by_creates_start"
+        pdata = PartitionData([df[senseC2U_partition, :epattern], df[creates_start_partition, :epattern]],BitVector([0,0]))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = organelle == "cp" ? logrange(1e-4, 1e-2, resolution) : logrange(1e-5, 1e-3, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("creates_start_$organelle.bin", profiles)
+    end
+
+    #partioning_scheme = "unpartitioned_nonsynU2C"
+    #unpartitioned nonsynU2C
+    if partioning_scheme == "unpartitioned_nonsynU2C"
+        pdata = PartitionData([df[nonsynU2C_partition, :epattern]],BitVector([]))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = logrange(1e-4, 1e-2, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("unpartitioned_nonsynU2C_$organelle.bin", profiles)
+    end
+
+    #partioning_scheme = "partitioned_by_removes_stop"
+    #partitioned by removes_stop
+    if partioning_scheme == "partitioned_by_removes_stop"
+        pdata = PartitionData([df[senseU2C_partition, :epattern], df[removes_stop_partition, :epattern]],BitVector([1,1]))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = logrange(1e-4, 1e-2, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("removes_stop_$organelle.bin", profiles)
+    end
+
+    #partioning_scheme = "unpartitioned_senseC2U"
+    #unpartitioned senseC2U
+    if partioning_scheme == "unpartitioned_senseC2U"
+        pdata = PartitionData([df[senseC2U_partition, :epattern]],BitVector([]))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = organelle == "cp" ? logrange(1e-4, 1e-2, resolution) : logrange(1e-5, 1e-3, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("unpartitioned_senseC2U_$organelle.bin", profiles)
+    end
+
+    #partioning_scheme = "partitioned_by_position"
+    #partitioned by site position
+    if partioning_scheme == "partitioned_by_position"
+        pdata = PartitionData([df[senseC2U_partition .& (df.refpos .>= 40), :epattern], df[senseC2U_partition .& (df.refpos .< 40), :epattern]],BitVector([0,0]))
+        println("near-start partition: ", string(count(senseC2U_partition .& (df.refpos .< 40))))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = organelle == "cp" ? logrange(1e-4, 1e-2, resolution) : logrange(1e-5, 1e-3, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("site_pos_$organelle.bin", profiles)
+    end
+
+    #partioning_scheme = "partitioned_by_start_triplet"
+    #partitioned by sequence triplet ACG
+    if partioning_scheme == "partitioned_by_start_triplet"
+        no_start_triplet = .~df.is_start_triplet .& unedited_partition
+        start_triplet = df.is_start_triplet .& unedited_partition
+        pdata = PartitionData([df[no_start_triplet, :epattern], df[start_triplet, :epattern]],BitVector([0,0]))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = organelle == "cp" ? logrange(1e-4, 1e-2, resolution) : logrange(1e-5, 1e-3, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("start_triplet_$organelle.bin", profiles)
+    end
+
+    #partioning_scheme = "partitioned_by_stop_triplet"
+    #partitioned by sequence triplet one of [TAA, TGA, TAG]
+    if partioning_scheme == "partitioned_by_stop_triplet"
+        no_stop_triplet = .~df.is_stop_triplet .& unedited_partition
+        stop_triplet = df.is_stop_triplet .& unedited_partition
+        pdata = PartitionData([df[no_stop_triplet, :epattern], df[stop_triplet, :epattern]],BitVector([1,1]))
+        resolution = 20
+        ancestral = range(0.35,0.45; length = resolution)
+        searchspace = organelle == "cp" ? logrange(1e-4, 1e-2, resolution) : logrange(1e-5, 1e-3, resolution)
+        searchspaces = fill(searchspace, length(pdata.partitions) + 1)
+        profiles = profile_likelihoods(pdata, searchspaces, resolution,
+            ancestral, trajectories, trajectoriesbypattern)
+        serialize("stop_triplet_$organelle.bin", profiles)
+    end 
 
     #fully partitioned
-    pdata = PartitionData(
-    [df[df.edittype .== '.', :epattern],
-    df[(df.edittype .== 'U') .& .~df.Yissynonymous .& .~df.creates_start .& .~df.creates_stop, :epattern],
-    df[df.creates_start, :epattern],
-    df[df.creates_stop, :epattern],
-    df[(df.edittype .== 'C') .& .~df.Yissynonymous .& .~df.removes_stop, :epattern],
-    df[df.removes_stop, :epattern]],
-    BitVector([0,0,0,0,1,1,1]))
+    partioning_scheme = "fully_partitioned"
+    if partioning_scheme == "fully_partitioned"
+        pdata = PartitionData(
+        [df[unedited_partition, :epattern],
+        df[synC2U_partition, :epattern],
+        df[senseC2U_partition, :epattern],
+        df[creates_start_partition, :epattern],
+        df[senseU2C_partition, :epattern],
+        df[removes_stop_partition, :epattern]],
+        BitVector([0,0,0,0,1,1]))
 
-    if organelle == "cp"
-        resolution = 11
-        ancestral = range(0.39,0.44; length = resolution)
-        searchspaces = Base.LogRange[]
-        push!(searchspaces, logrange(10^-3.4, 10^-3.2, resolution))
-        push!(searchspaces, logrange(10^-3.3, 10^-3, resolution))
-        push!(searchspaces, logrange(10^-2.4, 10^-2.2, resolution))
-        push!(searchspaces, logrange(10^-2.8, 10^-2.3, resolution))
-        push!(searchspaces, logrange(10^-2.9, 10^-1.8, resolution))
-        push!(searchspaces, logrange(10^-3.2, 10^-1.8, resolution))
-        push!(searchspaces, logrange(10^-3.6, 10^-2.66, resolution))
-        profiles = profile_likelihoods(pdata, searchspaces, resolution,
-            ancestral, trajectories, trajectoriesbypattern)
-        serialize("fully_partitioned_cp_zoom.bin", profiles)
-    elseif organelle == "mt"
-        resolution = 11
-        ancestral = range(0.40,0.44; length = resolution)
-        searchspaces = Base.LogRange[]
-        push!(searchspaces, logrange(10^-3.7, 10^-3.45, resolution))
-        push!(searchspaces, logrange(10^-5.0, 10^-4.2, resolution))
-        push!(searchspaces, logrange(10^-3.2, 10^-2.9, resolution))
-        push!(searchspaces, logrange(10^-6.0, 10^-2.95, resolution))
-        push!(searchspaces, logrange(10^-6.0, 10^-3.0, resolution))
-        push!(searchspaces, logrange(10^-2.6, 10^-2.0, resolution))
-        push!(searchspaces, logrange(10^-3.3, 10^-2.9, resolution))
-        profiles = profile_likelihoods(pdata, searchspaces, resolution,
-            ancestral, trajectories, trajectoriesbypattern)
-        serialize("fully_partitioned_mt_zoom.bin", profiles)
+        if organelle == "cp"
+            resolution = 11
+            ancestral = range(0.35,0.45; length = resolution)
+            searchspaces = Base.LogRange[]
+            push!(searchspaces, logrange(10^-3.5, 10^-3.0, resolution))
+            push!(searchspaces, logrange(10^-2.8, 10^-2.4, resolution))
+            push!(searchspaces, logrange(10^-4.0, 10^-1.5, resolution))
+            push!(searchspaces, logrange(10^-2.8, 10^-2.0, resolution))
+            push!(searchspaces, logrange(10^-4.0, 10^-2.0, resolution))
+            push!(searchspaces, logrange(10^-4.0, 10^-1.5, resolution))
+            push!(searchspaces, logrange(10^-5.0, 10^-2.0, resolution))
+            profiles = profile_likelihoods(pdata, searchspaces, resolution,
+                ancestral, trajectories, trajectoriesbypattern)
+            serialize("fully_partitioned_cp_syn_zoom.bin", profiles)
+        elseif organelle == "mt"
+            resolution = 11
+            ancestral = range(0.30,0.42; length = resolution)
+            searchspaces = Base.LogRange[]
+            push!(searchspaces, logrange(10^-4.0, 10^-3.0, resolution))
+            push!(searchspaces, logrange(10^-6, 10^-3.5, resolution))
+            push!(searchspaces, logrange(10^-3.5, 10^-2.5, resolution))
+            push!(searchspaces, logrange(10^-3.5, 10^-2.5, resolution))
+            push!(searchspaces, logrange(10^-6, 10^-2.5, resolution))
+            push!(searchspaces, logrange(10^-3, 10^-2.0, resolution))
+            push!(searchspaces, logrange(10^-3.4, 10^-2.8, resolution))
+            profiles = profile_likelihoods(pdata, searchspaces, resolution,
+                ancestral, trajectories, trajectoriesbypattern)
+            serialize("fully_partitioned_mt_syn_zoom.bin", profiles)
+        end
     end
 end
 @main

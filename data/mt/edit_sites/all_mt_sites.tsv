@@ -1186,7 +1186,6 @@ mat-Leptoi95g2ceU740	false	false	false	false		0.845744680851064	0.76047904191616
 mat-Leptoi95g2ceU1322	false	false	false	false		0.686666666666667	0.7064676616915423	0.6503067484662577	0.7587939698492462
 mat-Leptoi95g2ceU1328	false	false	false	false		0.913333333333333	0.8505154639175257	0.5547112462006079	0.7360406091370558
 cobeU132	true	false	false	false	0.0938303341902314	0.070950762144972		0.5703371331554693	0.09737423082342994
-atp4eU483	true	false	false	false	0.121524201853759	0.110577948389849		0.13286498128301114	0.06427045976548333
 cox1eU1338	true	false	false	false	0.0847900341571228	0.111083828512498		0.2542471202452971	0.12236356175625769
 mat-LeptoeU2144	false	false	false	false	0.88135593220339	0.949579831932773		0.8739365815931941	0.9053097345132743
 nad2eU790	false	false	false	false	0.849427168576105	0.917306350314027		0.9345969033635878	0.9791908735607902
@@ -1195,7 +1194,6 @@ atp1eU900	false	false	false	false	0.0979557069846678			0.35462618160985393	0.987
 rpl6eU168	true	false	false	false	0.0847457627118644			0.21770985974460957	0.30799148069265675
 atp8eU105	true	false	false	false	0.0667655786350148			0.11234159150587966	0.21426074799021322
 nad6eU294	false	false	false	false	0.152941176470588			0.05669010155116617	0.11464252263502966
-rpl2eU357	true	false	false	false	0.299270072992701			0.09057971014492754	0.4832146490335707
 cobeC1167	true	false	false	false		0.0646247054863682		0.07454836496684199	0.06042386893130918
 cox2eU75	true	false	false	false		0.225022638092363		0.08195656209392983	0.22338480292563997
 mttBeU485	false	false	false	false		0.726901062959935		0.5839708561020036	0.9320778017906761
@@ -1279,7 +1277,6 @@ nad4eU1042	false	false	false	false				0.8955574540794532	0.9316621673736984
 nad4eU1202	false	false	false	false				0.9738944087278395	0.9339047815759579
 nad5eU398	false	false	false	false				0.8852596314907872	0.9673587439314121
 nad5eU598	false	false	false	false				0.9345878136200717	0.9901997738409348
-rpl2eU2	false	true	false	false				0.8326612903225806	0.8943894389438944
 rpl5eU6	true	false	false	false				0.10203562340966921	0.7700736175312447
 rpl5eU59	false	false	false	false				0.7150602409638555	0.6844368013757524
 rpl16eU308	false	false	false	false				0.935061153174141	0.9849175727814802
@@ -2062,6 +2059,7 @@ cox1eU474	false	false	false	false	0.0937109537692628			0.16263954733139624
 atp8eU279	true	false	false	false	0.141644908616188			0.06618894965114086	
 nad6eU225	true	false	false	false	0.163218390804598			0.09198413822404758	
 nad7eU1077	true	false	false	false	0.0773694390715667			0.06740442655935613	
+rpl2eU357	true	false	false	false	0.299270072992701			0.09057971014492754	
 rps1eU575	false	false	false	false	0.304705882352941			0.07051991150442478	
 rps4eU130	true	false	false	false	0.125237191650854			0.09881460407776198	
 cobeU864	true	false	false	false		0.0850416256378122		0.1176774193548387	
@@ -2150,6 +2148,7 @@ cobeU127	false	false	false	false	0.10613810741688	0.0605893389250635
 cobeU771	false	false	false	false	0.13854351687389	0.0699283002952341			
 cobeU1089	false	false	false	false	0.123442367601246	0.083362188365651			
 rpl5eU279	true	false	false	false	0.187096774193548	0.140374331550802			
+atp4eU483	true	false	false	false	0.121524201853759	0.110577948389849			
 atp4eU126	true	false	false	false	0.156424581005587	0.0729148452526666			
 atp1eU1065	true	false	false	false	0.116849580374435	0.0576206567888398			
 rps11eU90	true	false	false	false	0.778936392075078	0.133620689655172			
@@ -2276,7 +2275,7 @@ rpl5eU396	true	false	false	false			0.12016806722689076
 rpl5eU411	true	false	false	false			0.23846153846153847		
 rpl6eU93	true	false	false	false			0.06347396427213987		
 rps1eU372	false	false	false	false			0.07467144563918758		
-rps1eU595	false	false	true	false			0.9572072072072072		
+rps1eU596	false	false	true	false			0.9572072072072072		
 rps2eU243	true	false	false	false			0.07101947308132875		
 rps3eU41	false	false	false	false			0.09680207433016422		
 rps3eU1089	true	false	false	false			0.16838760921366164		
@@ -2306,6 +2305,7 @@ atp1eU1521	true	false	false	false				0.772217467681636
 atp4eC82	true	false	false	false				0.09121295402213474	
 atp4eU117	false	false	false	false				0.6690265486725664	
 atp4eU353	false	false	false	false				0.9170923088311496	
+atp4eU481	true	false	false	false				0.13286498128301114	
 atp6eU217	false	false	false	false				0.27790454920619506	
 atp6eU218	false	false	false	false				0.9322181818181818	
 atp9eC115	false	false	false	false				0.8845749613601237	
@@ -2354,6 +2354,7 @@ nad7eU1026	true	false	false	false				0.06595441595441595
 nad7eU1054	false	false	false	false				0.9147742452578146	
 nad9eC372	false	false	false	false				0.056705161442375675	
 nad9eU539	false	false	false	false				0.91608541360744	
+rpl2eU2	false	true	false	false				0.8326612903225806	
 rpl6eU14	false	false	false	false				0.6286959228135699	
 rpl16eU138	true	false	false	false				0.09251101321585903	
 rpl16eC382	false	false	false	false				0.9257274119448698	
@@ -2382,10 +2383,10 @@ mat-Leptoi95g2ceU106	false	false	false	false				0.2
 mat-Leptoi95g2ceU113	false	false	false	false				0.325	
 mat-Leptoi95g2ceU797	false	false	false	false				0.6196213425129088	
 mat-Leptoi95g2ceC826	false	false	false	false				0.6198019801980198	
-mat-Leptoi95g2ceU1701	true	false	false	false				0.1391304347826087	
+mat-Leptoi95g2ceU1705	true	false	false	false				0.1391304347826087	
 mat-LeptoeU404	false	false	false	false				0.15862068965517243	
 mat-LeptoeU1068	true	false	false	false				0.4787234042553192	
-mat-LeptoeU2419	false	false	true	false				0.8548728813559322	
+mat-LeptoeU2365	false	false	true	false				0.8548728813559322	
 atp1eU114	true	false	false	false					0.3449560685783339
 atp1eU282	true	false	false	false					0.07538737896689206
 atp1eU479	false	false	false	false					0.9920781717734674
@@ -2421,6 +2422,7 @@ atp4eU28	false	false	false	false					0.4151129822149669
 atp4eU44	false	false	false	false					0.9062573420001566
 atp4eU62	false	false	false	false					0.8948236402800216
 atp4eC121	false	false	false	true					0.8521235887543088
+atp4eU489	true	false	false	false					0.06427045976548333
 atp4eU539	false	false	false	false					0.9161847577331004
 atp6eU67	false	false	false	false					0.985058071251468
 atp6eU77	false	false	false	false					0.9929849948095253
@@ -2686,7 +2688,9 @@ nad9eU369	false	false	false	false					0.11143722779776558
 nad9eU372	true	false	false	false					0.08064975776574522
 nad9eU386	false	false	false	false					0.9515094424258735
 nad9eU398	false	false	false	false					0.9724048442906574
+rpl2eU14	false	true	false	false					0.8943894389438944
 rpl2eC191	false	false	false	false					0.9611253196930947
+rpl2eU363	true	false	false	false					0.4832146490335707
 rpl2eU378	true	false	false	false					0.6548672566371682
 rpl2eU461	false	false	false	false					0.6717171717171717
 rpl2eU668	false	false	false	false					0.9567154678548695
@@ -2796,7 +2800,7 @@ sdh4eU119	false	false	false	false					0.9672567493345726
 sdh4eU218	false	false	false	false					0.9092874437910757
 sdh4eU245	false	false	false	false					0.9121976866456362
 mat-Leptoi95g2ceC469	false	false	false	true					0.6666666666666666
-mat-Leptoi95g2ceC571	false	false	false	true					0.6120996441281139
+mat-Leptoi95g2ceC573	false	false	false	true					0.6120996441281139
 mat-Leptoi95g2ceU1076	false	false	false	false					0.8285714285714286
 mat-Leptoi95g2ceC1396	false	false	false	true					0.6113989637305699
 mat-Leptoi95g2ceC1504	false	false	false	true					0.7515151515151515
