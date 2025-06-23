@@ -1,5 +1,4 @@
-## Repository of data and code for the manuscript 'High conservation of translation-enabling RNA editing sites in hyper-editing ferns implies they are not selectively neutral
-' by Kwok van der Giezen et al.
+## Repository of data and code for the manuscript 'High conservation of translation-enabling RNA editing sites in hyper-editing ferns implies they are not selectively neutral' by Kwok van der Giezen et al.
 
 The data in this repository is from five water ferns from the *Salviniales* family: *Azolla filiculoides*, *Azolla rubra*, *Azolla pinnata*, *Salvinia molesta* and *Marsilea mutica*. The raw sequence reads, genome assemblies and transcriptome assemblies are not included in this repository but are available from the [SRA](https://www.ncbi.nlm.nih.gov/sra) or [GenBank](https://www.ncbi.nlm.nih.gov/genbank/). The relevant accessions are listed in `data/accessions.tsv`.
 
