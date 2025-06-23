@@ -41,7 +41,6 @@ The tables the code generates are included in this repository as `data/cp/edit_s
 
 `code/parsimony.ipynb` estimates editing site gains and losses for each organelle by the method of maximum  parsimony. Where different evolutionary scenarios are equally parsimonious, the events are distributed randomly amongst the branches in proportion to the branch lengths (i.e. longer branches are attributed more events). One such estimate is shown in Fig 3C.
 
-
 ### Estimation of C→T and T→C transition rates
 
 C→T and T→C transition rates were estimated using a non-time-reversible model by a maximum likelihood approach. The parameters of the model comprised C→T and T→C transition rates for each site class (unedited synonymous T→C, unedited synonymous C→T, non-synonymous C→T, start codon creation C→T, stop codon creation C→T, non-synonymous T→C, stop codon removal T→C) and the probability that the ancestral state of the site was C. To gain an idea of the confidence we can have in the parameter estimates, we carried out a profile likelihood analysis, by varying each parameter across a range either side of the optimal value. The resulting profile likelihoods are shown in Fig. S6, and the estimates of the C→T and T→C transition rates and their confidence intervals are shown in Fig. 5A and 5B. The code for calculating the profile likelihoods is included as `code/profile_likelihoods.jl` and can be run as follows:  
